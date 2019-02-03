@@ -14,15 +14,20 @@ public class Course {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "instructor_id")
-    private int instructorId;
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+                            CascadeType.MERGE,
+                            CascadeType.REFRESH,
+                            CascadeType.DETACH})
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
 
     public Course() {
     }
 
-    public Course(String title, int instructorId) {
+
+    public Course(String title, Instructor instructor) {
         this.title = title;
-        this.instructorId = instructorId;
+        this.instructor = instructor;
     }
 
     public int getId() {
@@ -37,11 +42,23 @@ public class Course {
         this.title = title;
     }
 
-    public int getInstructorId() {
-        return instructorId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setInstructorId(int instructorId) {
-        this.instructorId = instructorId;
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
