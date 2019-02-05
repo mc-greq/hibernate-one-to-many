@@ -21,7 +21,7 @@ public class DeleteCourseDemo {
 
         Session session = factory.getCurrentSession();
 
-        try(factory){
+        try(factory;session){
             session.beginTransaction();
 
             // get a course
